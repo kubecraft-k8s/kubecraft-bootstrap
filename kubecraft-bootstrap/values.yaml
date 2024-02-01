@@ -1,0 +1,11 @@
+capi:
+  operator:
+    version: v0.8.1
+  core:
+    version: v1.6.1
+  infrastructure:
+    hetzner:
+      version: v1.0.0-beta.28
+  addonprovider:
+    helm:
+      version: v0.1.1-alpha.0

@@ -1,0 +1,53 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: cluster-api-operated
+  namespace: capi-system
+spec:
+  dependsOn:
+    - name: cluster-api-operator
+      namespace: capi-system
+  chart:
+    spec:
+      chart: chart
+      interval: 1m
+      sourceRef:
+        kind: GitRepository
+        name: github.com-danielr1996-helm-extra-deploy
+        namespace: flux-system
+  interval: 1m
+  values:
+    extraDeploy:
+      - apiVersion: operator.cluster.x-k8s.io/v1alpha2
+        kind: CoreProvider
+        metadata:
+          name: cluster-api
+        spec:
+          version: {{.Values.capi.core.version}}
+      - apiVersion: operator.cluster.x-k8s.io/v1alpha2
+        kind: ControlPlaneProvider
+        metadata:
+          name: kubeadm
+        spec:
+          version: {{.Values.capi.core.version}}
+      - apiVersion: operator.cluster.x-k8s.io/v1alpha2
+        kind: BootstrapProvider
+        metadata:
+          name: kubeadm
+        spec:
+          version: {{.Values.capi.core.version}}
+      - apiVersion: operator.cluster.x-k8s.io/v1alpha2
+        kind: InfrastructureProvider
+        metadata:
+          name: hetzner
+        spec:
+          fetchConfig:
+            url: "https://github.com/syself/cluster-api-provider-hetzner/releases/{{.Values.capi.infrastructure.hetzner.version}}/infrastructure-components.yaml"
+      - apiVersion: operator.cluster.x-k8s.io/v1alpha2
+        kind: AddonProvider
+        metadata:
+          name: helm
+        spec:
+          version: {{.Values.capi.addonprovider.helm.version}}
+
+
