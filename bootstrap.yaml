@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/kubecraft/kubecraft-bootstrap
+  url: https://github.com/kubecraft-k8s/kubecraft-bootstrap
   ref:
     branch: main
 ---
