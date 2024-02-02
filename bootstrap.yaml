@@ -30,6 +30,15 @@ spec:
       accesskey: K004kxEoFaLMONaeb7kUrPjyPorqPqs
       awsbucket: kubecraft-test
       awsregion: us-west-004
-      s3url: s3.us-west-004.backblazeb2.com
-
+      s3url: https://s3.us-west-004.backblazeb2.com
+      plugins:
+        csi:
+          version: v0.7.0
+        aws:
+          version:
+          secretkeyid: 0042a4ce0ece8c00000000020
+          secretaccesskey: K004kxEoFaLMONaeb7kUrPjyPorqPqs
+          region: us-west-004
+          bucket: kubecraft-test
+          url: https://s3.us-west-004.backblazeb2.com
 

@@ -16,3 +16,13 @@ velero:
   awsbucket: ""
   awsregion: ""
   s3url: ""
+  plugins:
+    csi:
+      version: v0.7.0
+    aws:
+      version:
+      secretkeyid:
+      secretaccesskey:
+      region:
+      bucket:
+      url:
