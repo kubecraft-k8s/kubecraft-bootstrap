@@ -9,15 +9,6 @@ spec:
   url: oci://ghcr.io
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: fluxcd-community
-  namespace: flux-system
-spec:
-  interval: 1m
-  url: https://fluxcd-community.github.io/helm-charts
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: GitRepository
 metadata:
   name: github.com-danielr1996-helm-extra-deploy
