@@ -2,11 +2,11 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: cluster-api-operated
-  namespace: capi-system
+  namespace: flux-system
 spec:
   dependsOn:
     - name: cluster-api-operator
-      namespace: capi-system
+      namespace: flux-system
   chart:
     spec:
       chart: chart
