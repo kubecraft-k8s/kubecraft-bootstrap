@@ -17,14 +17,3 @@ spec:
   url: https://github.com/danielr1996/helm-extra-deploy
   ref:
     branch: main
----
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: GitRepository
-metadata:
-  name: github.com-kubecraft-kubecraft-bootstrap
-  namespace: flux-system
-spec:
-  interval: 1m
-  url: https://github.com/kubecraft/kubecraft-bootstrap
-  ref:
-    branch: main

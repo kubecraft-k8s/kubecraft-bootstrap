@@ -10,9 +10,9 @@ capi:
     helm:
       version: v0.1.1-alpha.0
 velero:
-  keyid: 0042a4ce0ece8c00000000020
-  accesskey: K004kxEoFaLMONaeb7kUrPjyPorqPqs
   veleroawsversion: v1.9.0
-  awsbucket: kubecraft-test
-  awsregion: us-west-004
-  s3url: s3.us-west-004.backblazeb2.com
+  keyid: ""
+  accesskey: ""
+  awsbucket: ""
+  awsregion: ""
+  s3url: ""
