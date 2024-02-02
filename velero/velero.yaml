@@ -1,53 +1,53 @@
-#apiVersion: source.toolkit.fluxcd.io/v1beta2
-#kind: HelmRepository
-#metadata:
-#  name: vmware-tanzu
-#  namespace: flux-system
-#spec:
-#  interval: 1m0s
-#  url: https://vmware-tanzu.github.io/helm-charts
-#---
-#apiVersion: helm.toolkit.fluxcd.io/v2beta2
-#kind: HelmRelease
-#metadata:
-#  name: velero
-#  namespace: velero
-#spec:
-#  chart:
-#    spec:
-#      chart: velero
-#      interval: 1m
-#      sourceRef:
-#        kind: HelmRepository
-#        name: vmware-tanzu
-#        namespace: flux-system
-#  interval: 1m
-#  values:
-#    deployNodeAgent: true
-#    initContainers:
-#     - name: velero-plugin-for-aws
-#       image: "velero/velero-plugin-for-aws:{{ .Values.velero.veleroawsversion }}"
-#       imagePullPolicy: IfNotPresent
-#       volumeMounts:
-#         - mountPath: /target
-#           name: plugins
-#     - name: velero-plugin-for-csi
-#       image: "velero/velero-plugin-for-csi:{{ .Values.velero.plugins.csi.version }}"
-#       imagePullPolicy: IfNotPresent
-#       volumeMounts:
-#         - mountPath: /target
-#           name: plugins
-#    credentials:
-#      secretContents:
-#        cloud: |
-#          [default]
-#          aws_access_key_id={{ .Values.velero.keyid }}
-#          aws_secret_access_key={{ .Values.velero.accesskey }}
-#    configuration:
-#      features: EnableCSI
-#      backupStorageLocation:
-#        - provider: aws
-#          bucket: {{ .Values.velero.awsbucket }}
-#          config:
-#            region: {{ .Values.velero.awsregion }}
-#            s3Url: {{ .Values.velero.s3url }}
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: vmware-tanzu
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  url: https://vmware-tanzu.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: velero
+  namespace: velero
+spec:
+  chart:
+    spec:
+      chart: velero
+      interval: 1m
+      sourceRef:
+        kind: HelmRepository
+        name: vmware-tanzu
+        namespace: flux-system
+  interval: 1m
+  values:
+    deployNodeAgent: true
+    initContainers:
+     - name: velero-plugin-for-aws
+       image: "velero/velero-plugin-for-aws:${velero_plugins_aws_version:=v1.9.0}"
+       imagePullPolicy: IfNotPresent
+       volumeMounts:
+         - mountPath: /target
+           name: plugins
+     - name: velero-plugin-for-csi
+       image: "velero/velero-plugin-for-csi:${velero_plugins_aws_version:=v0.7.0}"
+       imagePullPolicy: IfNotPresent
+       volumeMounts:
+         - mountPath: /target
+           name: plugins
+    credentials:
+      secretContents:
+        cloud: |
+          [default]
+          aws_access_key_id=${velero_plugins_aws_accesskeyid}
+          aws_secret_access_key=${velero_plugins_aws_secretaccesskey}
+    configuration:
+      features: EnableCSI
+      backupStorageLocation:
+        - provider: aws
+          bucket: ${velero_plugins_aws_bucket}
+          config:
+            region: ${velero_plugins_aws_region}
+            s3Url: ${velero_plugins_aws_url}
