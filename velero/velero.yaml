@@ -52,7 +52,7 @@ spec:
       defaultBackupStorageLocation: backblaze
       backupStorageLocation:
         - name: backblaze
-        - provider: aws
+          provider: aws
           bucket: ${velero_plugins_aws_bucket}
           config:
             region: ${velero_plugins_aws_region}

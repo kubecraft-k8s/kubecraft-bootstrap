@@ -15,6 +15,9 @@ metadata:
   name: cluster-api-operated
   namespace: flux-system
 spec:
+  install:
+    createNamespace: true
+  targetNamespace: capi-system
   dependsOn:
     - name: cluster-api-operator
       namespace: flux-system

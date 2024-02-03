@@ -13,6 +13,9 @@ metadata:
   name: cluster-api-operator
   namespace:  flux-system
 spec:
+  install:
+    createNamespace: true
+  targetNamespace: capi-system
   chart:
     spec:
       chart: cluster-api-operator
