@@ -13,6 +13,9 @@ metadata:
   name: velero
   namespace: flux-system
 spec:
+  install:
+    createNamespace: true
+  targetNamespace: velero
   chart:
     spec:
       chart: velero
@@ -46,7 +49,9 @@ spec:
           aws_secret_access_key=${velero_plugins_aws_secretaccesskey}
     configuration:
       features: EnableCSI
+      defaultBackupStorageLocation: backblaze
       backupStorageLocation:
+        - name: backblaze
         - provider: aws
           bucket: ${velero_plugins_aws_bucket}
           config:
